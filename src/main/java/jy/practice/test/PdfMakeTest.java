@@ -1,21 +1,32 @@
 package jy.practice.test;
 
+import java.awt.Color;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+import org.apache.pdfbox.text.PDFTextStripperByArea;
 import org.knowm.xchart.BitmapEncoder;
 import org.knowm.xchart.CategoryChart;
 import org.knowm.xchart.CategoryChartBuilder;
+import org.knowm.xchart.DialChart;
+import org.knowm.xchart.DialChartBuilder;
+import org.knowm.xchart.PieChart;
+import org.knowm.xchart.PieSeries.PieSeriesRenderStyle;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
 import org.knowm.xchart.internal.chartpart.Chart;
+import org.knowm.xchart.style.PieStyler;
+import org.knowm.xchart.style.Styler.ChartTheme;
 
 public class PdfMakeTest {
   private static final float MARGIN = 50;
@@ -40,25 +51,38 @@ public class PdfMakeTest {
         // 1. 제목 추가
         startY = addTitle(contentStream, page, boldFont, "2025년 월별 데이터 리포트", startY);
 
+        // 1-1. 선 추가
+        contentStream.moveTo(MARGIN, startY);
+        contentStream.lineTo(page.getMediaBox().getWidth() - MARGIN, startY);
+        contentStream.setLineWidth(1f);
+        contentStream.setStrokingColor(Color.BLUE);
+        contentStream.stroke();
+
         // 2. 서문 추가
-        startY = addParagraph(contentStream,
+        contentStream.setLeading(25f); // 줄간격 설정
+        startY = addParagraphAutoLine(page, document, contentStream,
             font,
-            "본 보고서는 2025년 1월부터 12월까지의 주요 지표를 시각화하여 제공합니다.",
+            "본 보고서는 2025년 1월부터 12월까지의 주요 지표를 시각화하여 제공합니다."
+                + " 근데 이 내용이 길어지면 표시가 어떻게 되는지 궁금합니다. 그냥 밖으로 빠져나가려나요?",
             startY - LINE_HEIGHT * 2);
 
         // 3. 첫 번째 차트 (꺾은선 그래프)
         startY = addSectionTitle(contentStream, font, "월별 사용자 접속 추이", startY - LINE_HEIGHT * 2);
 //        BufferedImage lineChartImage = generateLineChart();
 //        startY = addImage(document, contentStream, lineChartImage, startY - LINE_HEIGHT);
-        Chart lineChart = generateLineChart();
-        startY = addImage(document, contentStream, lineChart, startY - LINE_HEIGHT);
+//        Chart lineChart = generateLineChart();
+//        startY = addImage(document, contentStream, lineChart, startY - LINE_HEIGHT);
+        Chart dialChart = generateDialChart();
+        startY = addImage(document, contentStream, dialChart, startY - LINE_HEIGHT);
 
         // 4. 두 번째 차트 (막대 그래프)
         startY = addSectionTitle(contentStream, font, "카테고리별 매출 현황", startY - LINE_HEIGHT * 2);
 //        BufferedImage barChartImage = generateBarChart();
 //        addImage(document, contentStream, barChartImage, startY - LINE_HEIGHT);
-        Chart barChart = generateBarChart();
-        addImage(document, contentStream, barChart, startY - LINE_HEIGHT);
+//        Chart barChart = generateBarChart();
+//        addImage(document, contentStream, barChart, startY - LINE_HEIGHT);
+        PieChart pieChart = generateDonutChart();
+        addImage(document, contentStream, pieChart, startY - LINE_HEIGHT);
       }
 
       // PDF 저장
@@ -111,6 +135,63 @@ public class PdfMakeTest {
     contentStream.endText();
     return y - LINE_HEIGHT;
   }
+
+  private static float addParagraphAutoLine(PDPage page, PDDocument document, PDPageContentStream contentStream,
+      PDType0Font font, String text, float y) throws IOException {
+    float pageWidth = page.getMediaBox().getWidth();
+    float pageHeight = page.getMediaBox().getHeight();
+    float minY = MARGIN;
+    float maxWidth = pageWidth - 2 * MARGIN;
+    int fontSize = 12;
+    float leading = 14;
+
+    List<String> lines = new ArrayList<>();
+
+    for (String paragraph : text.split("\n")) {
+      String[] words = paragraph.split("\\s+");
+      StringBuilder currentLine = new StringBuilder();
+
+      for (String word : words) {
+        if (currentLine.length() > 0) {
+          float lineWidth = fontSize * font.getStringWidth(currentLine + " " + word) / 1000;
+          if (lineWidth <= maxWidth) {
+            currentLine.append(" ").append(word);
+          } else {
+            lines.add(currentLine.toString());
+            currentLine = new StringBuilder(word);
+          }
+        } else {
+          currentLine.append(word);
+        }
+      }
+
+      if (currentLine.length() > 0) {
+        lines.add(currentLine.toString());
+      }
+    }
+
+    for (String line : lines) {
+      if (y < minY) {
+        contentStream.endText();
+        contentStream.close();
+        PDPage newPage = new PDPage(page.getMediaBox());
+        document.addPage(newPage);
+        contentStream = new PDPageContentStream(document, newPage);
+        y = pageHeight - MARGIN;
+      }
+
+      contentStream.beginText();
+      contentStream.setFont(font, fontSize);
+      contentStream.newLineAtOffset(MARGIN, y);
+      contentStream.showText(line);
+      contentStream.endText();
+
+      y -= leading;
+    }
+
+    return y;
+  }
+
 
   // 이미지 추가
   private static float addImage(PDDocument document, PDPageContentStream contentStream,
@@ -175,5 +256,47 @@ public class PdfMakeTest {
     chart.getStyler().setPlotGridVerticalLinesVisible(false); // 수직 그리드 제거
 
     return chart;
+  }
+
+  private static DialChart generateDialChart() {
+    ChartTheme xChartTheme = ChartTheme.XChart;
+
+    DialChart dialChart =
+        new DialChartBuilder().title("title").height(250).width(200).theme(xChartTheme).build();
+
+    dialChart.getStyler().setLabelVisible(false);
+    dialChart.getStyler().setChartBackgroundColor(Color.WHITE);
+    dialChart.getStyler().setPlotBackgroundColor(Color.WHITE);
+    dialChart.getStyler().setCircular(true);
+    dialChart.getStyler().setAxisTitlePadding(5);
+
+    dialChart.getStyler().setAxisTickValues(new double[] { .33, .45, .79});
+    dialChart.getStyler().setAxisTickLabels(new String[] { "min", "average", "max"});
+
+    dialChart.addSeries("series-name", 0.925, "label");
+
+    return dialChart;
+  }
+
+  private static PieChart generateDonutChart() {
+    ChartTheme matlabChartTheme = ChartTheme.Matlab; // 라벨 이름이 차트 내에 들어감
+
+    PieChart pieChart = new PieChart(500, 500, matlabChartTheme);
+    PieStyler pieChartStyler = pieChart.getStyler();
+
+    pieChartStyler.setLegendVisible(false); // 범례
+    pieChartStyler.setPlotContentSize(0.7); // 전체 중 차트 크기 비율
+    pieChartStyler.setDefaultSeriesRenderStyle(PieSeriesRenderStyle.Donut);
+    pieChartStyler.setCircular(true); // ?? 잘 모르겠음
+
+    // 값은 비율로 알아서 계산되어 할당됨
+    pieChart.addSeries(" ", 15);
+    pieChart.addSeries("  ", 10);
+    Color[] colors = new Color[2];
+    colors[0] = Color.RED;
+    colors[1] = new Color(242, 242, 242);
+    pieChartStyler.setSeriesColors(colors);
+
+    return pieChart;
   }
 }

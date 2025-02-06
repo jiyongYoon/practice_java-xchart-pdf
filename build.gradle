@@ -13,10 +13,15 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
     // chart
     implementation 'org.knowm.xchart:xchart:3.8.8'
     // pdf
     implementation 'org.apache.pdfbox:pdfbox:2.0.29'
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2.1'
 }
 
 test {
