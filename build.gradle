@@ -16,10 +16,16 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
-    // chart
-    implementation 'org.knowm.xchart:xchart:3.8.8'
     // pdf
-    implementation 'org.apache.pdfbox:pdfbox:2.0.29'
+    implementation 'org.apache.pdfbox:pdfbox:2.0.24'
+    // pdf-table
+    implementation 'com.github.vandeseer:easytable:0.8.5' // 현재 프로젝트는 java 8을 사용하는데, easytable 1.0.2 버전은 java 11부터 지원해서 사용 불가
+    // pdf-tester
+    testImplementation 'de.redsix:pdfcompare:1.1.58'
+    // chart
+    implementation ('org.knowm.xchart:xchart:3.8.8') {
+        exclude group: 'org.apache.pdfbox', module: 'pdfbox' // xchart 3.8.8 버전은 pdfbox:3.0.1 버전을 import해오기 때문에 제거
+    }
 
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2.1'
 }
