@@ -1,6 +1,9 @@
 package jy.practice.test;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -41,8 +44,8 @@ public class PdfMakeTest {
       PDPage page = new PDPage(PDRectangle.A4);
       document.addPage(page);
 
-      PDType0Font font = PDType0Font.load(document, new File("NanumGothic.ttf"));
-      PDType0Font boldFont = PDType0Font.load(document, new File("NanumGothicBold.ttf"));
+      PDType0Font font = PDType0Font.load(document, new File("./font/Pretendard-Regular.ttf"));
+      PDType0Font boldFont = PDType0Font.load(document, new File("./font/Pretendard-Bold.ttf"));
 
       try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
         // 초기 Y 위치 계산
@@ -281,7 +284,25 @@ public class PdfMakeTest {
   private static PieChart generateDonutChart() {
     ChartTheme matlabChartTheme = ChartTheme.Matlab; // 라벨 이름이 차트 내에 들어감
 
-    PieChart pieChart = new PieChart(500, 500, matlabChartTheme);
+//    PieChart pieChart = new PieChart(500, 500, matlabChartTheme);
+    PieChart pieChart = new PieChart(500, 500, matlabChartTheme) {
+      // 가운데 숫자 % 표시
+      @Override
+      public void paint(Graphics2D g, int width, int height) {
+        super.paint(g, width, height);
+
+        String centerText = "60%"; // 표시할 텍스트
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Arial", Font.BOLD, 30));
+
+        FontMetrics metrics = g.getFontMetrics();
+        int x = (width - metrics.stringWidth(centerText)) / 2;
+        int y = (height - metrics.getHeight()) / 2 + metrics.getAscent();
+
+        g.drawString(centerText, x, y);
+      }
+    };
+
     PieStyler pieChartStyler = pieChart.getStyler();
 
     pieChartStyler.setLegendVisible(false); // 범례
@@ -290,7 +311,7 @@ public class PdfMakeTest {
     pieChartStyler.setCircular(true); // ?? 잘 모르겠음
 
     // 값은 비율로 알아서 계산되어 할당됨
-    pieChart.addSeries(" ", 15);
+    pieChart.addSeries(" ", 15); // 데이터의 값 표시
     pieChart.addSeries("  ", 10);
     Color[] colors = new Color[2];
     colors[0] = Color.RED;
