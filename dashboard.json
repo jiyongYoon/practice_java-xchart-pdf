@@ -1,0 +1,25 @@
+{
+  "round" : {
+    "id" : 1,
+    "sequence" : 1,
+    "start_date" : "2025-01-01",
+    "end_date" : "2025-12-31",
+    "achievement_rate" : 50.0,
+    "status" : "보통",
+    "created_date" : "2025-01-01"
+  },
+  "sapa_criterias" : [
+    {
+      "id" : 1,
+      "name" : "안전보건 목표 및 경영방침",
+      "count" : 3,
+      "achievement_rate" : 66.6,
+      "created_date" : "2025-01-01",
+      "updated_date" : "2025-01-01",
+      "status" : "보통"
+    }
+  ],
+  "unclassifiedFile" : {
+    "size" : 10
+  }
+}

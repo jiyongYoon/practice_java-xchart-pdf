@@ -1,8 +1,6 @@
 package jy.practice.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,12 +15,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-public class DashboardDto {
+public class UnclassifiedFileDto {
 
-  @JsonProperty("round")
-  private RoundDto roundDto;
-  @JsonProperty("sapa_criterias")
-  private List<SapaCriteriaDto> sapaCriteriaList;
-  @JsonProperty("unclassifiedFile")
-  private UnclassifiedFileDto unclassifiedFileDto;
+  @JsonProperty("size")
+  private Integer size;
+
 }

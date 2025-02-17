@@ -17,11 +17,19 @@ import lombok.ToString;
 @ToString
 public class RoundDto {
 
+  @JsonProperty("id")
+  private Long id;
   @JsonProperty("sequence")
-  private Integer sequence;
-  @JsonProperty("start_date")
+  private Long sequence;
+  @JsonProperty("start_date") // yyyy-MM-dd
   private String startDate;
-  @JsonProperty("end_date")
+  @JsonProperty("end_date") // yyyy-MM-dd
   private String endDate;
+  @JsonProperty("achievement_rate")
+  private Double achievementRate;
+  @JsonProperty("status")
+  private Status status;
+  @JsonProperty("created_date") // yyyy-MM-dd
+  private String createdDate;
 
 }

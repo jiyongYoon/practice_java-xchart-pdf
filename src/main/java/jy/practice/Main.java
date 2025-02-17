@@ -11,7 +11,7 @@ public class Main {
   public static void main(String[] args) throws IOException {
     ObjectMapper objectMapper = new ObjectMapper();
 
-    BufferedReader br = new BufferedReader(new FileReader("./data.json"));
+    BufferedReader br = new BufferedReader(new FileReader("./dashboard.json"));
     StringBuilder sb = new StringBuilder();
     String data;
     while ((data = br.readLine()) != null) {

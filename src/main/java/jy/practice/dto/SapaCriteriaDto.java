@@ -16,9 +16,9 @@ import lombok.ToString;
 @Builder
 @ToString
 public class SapaCriteriaDto {
-  @JsonProperty("sapa_criteria_id")
+  @JsonProperty("id")
   private Long id;
-  @JsonProperty("sapa_criteria_name")
+  @JsonProperty("name")
   private String name;
   @JsonProperty("achievement_rate")
   private Double achievementRate;
@@ -26,4 +26,8 @@ public class SapaCriteriaDto {
   private Integer count;
   @JsonProperty("status")
   private Status status;
+  @JsonProperty("created_date") // yyyy-MM-dd
+  private String createdDate;
+  @JsonProperty("updated_date") // yyyy-MM-dd
+  private String updatedDate;
 }
