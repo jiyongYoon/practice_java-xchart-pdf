@@ -36,8 +36,13 @@ public class PieChartGenerator {
       }
     };
     // 값은 비율로 알아서 계산되어 할당됨
-    pieChart.addSeries(" ", okCount); // 데이터의 값 표시
-    pieChart.addSeries("  ", totalCount - okCount);
+    if (percent == 0) {
+      pieChart.addSeries(" ", 0);
+      pieChart.addSeries("  ", 1);
+    } else {
+      pieChart.addSeries(" ", okCount); // 데이터의 값 표시
+      pieChart.addSeries("  ", totalCount - okCount);
+    }
 
     PieStyler pieChartStyler = pieChart.getStyler();
     pieChartStyler.setLegendVisible(false); // 범례

@@ -20,6 +20,8 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
+import org.vandeseer.easytable.RepeatedHeaderTableDrawer;
+import org.vandeseer.easytable.RepeatedHeaderTableDrawer.RepeatedHeaderTableDrawerBuilder;
 import org.vandeseer.easytable.TableDrawer;
 import org.vandeseer.easytable.structure.Row;
 import org.vandeseer.easytable.structure.Table;
@@ -75,39 +77,44 @@ public class TableTest {
           .padding(DEFAULT_PADDING)
           .borderColor(Color.WHITE);
 
-      // header
-      tableBuilder.addRow(
-          Row.builder()
-              .add(TextCell.builder().text(headers[0]).borderWidth(1).build())
-              .add(TextCell.builder().text(headers[1]).borderWidth(1).build())
-              .add(TextCell.builder().text(headers[2]).borderWidth(1).build())
-              .add(TextCell.builder().text(headers[3]).borderWidth(1).build())
-              .add(TextCell.builder().text(headers[4]).borderWidth(1).build())
-              .backgroundColor(BLUE_DARK)
-              .textColor(Color.WHITE)
-              .font(boldFont)
-              .fontSize(10)
-              .horizontalAlignment(CENTER)
-              .build()
-      );
+      Row header = Row.builder()
+          .add(TextCell.builder().text(headers[0]).borderWidth(1).build())
+          .add(TextCell.builder().text(headers[1]).borderWidth(1).build())
+          .add(TextCell.builder().text(headers[2]).borderWidth(1).build())
+          .add(TextCell.builder().text(headers[3]).borderWidth(1).build())
+          .add(TextCell.builder().text(headers[4]).borderWidth(1).build())
+          .backgroundColor(BLUE_DARK)
+          .textColor(Color.WHITE)
+          .font(boldFont)
+          .fontSize(10)
+          .horizontalAlignment(CENTER)
+          .build();
+
+      // add header
+      tableBuilder.addRow(header);
 
       // body
+      generateBodyTable(safetyHealthItems, boldFont, font, tableBuilder);
       generateBodyTable(safetyHealthItems, boldFont, font, tableBuilder);
 
       Table myTable = tableBuilder.build();
 
       float startY = page.getMediaBox().getHeight() - PADDING;
+      float titleY = 50f;
 
       try (final PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
-        TableDrawer.builder()
+        RepeatedHeaderTableDrawer.builder()
             .page(page)
-            .contentStream(contentStream)
             .table(myTable)
+            .contentStream(contentStream)
             .startX(PADDING)
-            .startY(startY)
-            .endY(PADDING)
+            .startY(startY - titleY)
+            .endY(PADDING) // 테이블이 이 Y 좌표에 도달하면 새 페이지를 시작합니다
             .build()
-            .draw(() -> document, PDPageStore::generateHorizontalPage, PADDING);
+            .draw(
+                () -> document,
+                PDPageStore::generateHorizontalPage,
+                page.getMediaBox().getHeight() - (startY - titleY));
       }
 
       document.save(new File("table-test.pdf"));

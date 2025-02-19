@@ -4,11 +4,17 @@ import java.awt.Color;
 
 public class ColorStore {
 
+  // table
+  public final static Color BLUE_DARK = new Color(76, 129, 190);
+  public final static Color BLUE_LIGHT_1 = new Color(186, 206, 230);
+  public final static Color BLUE_LIGHT_2 = new Color(218, 230, 242);
+  public final static Color GRAY_LIGHT_1 = new Color(245, 245, 245);
+  public final static Color GRAY_LIGHT_2 = new Color(240, 240, 240);
+  public final static Color GRAY_LIGHT_3 = new Color(216, 216, 216);
+
 
   // text
-  private final static Color BLUE_LIGHT_1 = new Color(186, 206, 230);
-  private final static Color GRAY_LIGHT_3 = new Color(216, 216, 216);
-  private final static Color GRAY_DARK = new Color(130, 130, 130);
+  public final static Color GRAY_DARK = new Color(130, 130, 130);
 
 
   // chart

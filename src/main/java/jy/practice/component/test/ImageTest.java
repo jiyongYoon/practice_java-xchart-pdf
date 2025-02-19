@@ -49,8 +49,8 @@ public class ImageTest {
 //          .borderColor(Color.WHITE)
           .borderColor(Color.BLACK)
           .horizontalAlignment(CENTER)
-          .verticalAlignment(MIDDLE)
-          .padding(15f);
+          .verticalAlignment(MIDDLE);
+//          .padding(15f);
 
       tableBuilder.addRow(
           Row.builder()

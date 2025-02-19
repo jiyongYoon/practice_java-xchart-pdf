@@ -51,11 +51,11 @@ public class DashboardTest {
             document.addPage(page);
 
             try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
-                int chatsWidthAndHeight = 150;
+                int chartsWidthAndHeight = 150;
                 int okCount = 7;
                 int totalCount = 12;
 
-                PieChart pieChart = PieChartGenerator.generateDonutChart(chatsWidthAndHeight, chatsWidthAndHeight, okCount, totalCount, font);
+                PieChart pieChart = PieChartGenerator.generateDonutChart(chartsWidthAndHeight, chartsWidthAndHeight, okCount, totalCount, font);
                 PDImageXObject pdImageXObject = PDImageGenerator.generate(pieChart);
                 PDImageXObject tagImage = DangerTagStore.pick(Math.round((double) okCount / totalCount * 100.0));
 

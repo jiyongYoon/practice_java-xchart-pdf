@@ -26,7 +26,7 @@ public class RoundDto {
   @JsonProperty("end_date") // yyyy-MM-dd
   private String endDate;
   @JsonProperty("achievement_rate")
-  private Double achievementRate;
+  private Integer achievementRate;
   @JsonProperty("status")
   private Status status;
   @JsonProperty("created_date") // yyyy-MM-dd

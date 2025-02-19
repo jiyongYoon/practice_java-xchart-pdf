@@ -15,6 +15,11 @@ public class FontStore {
   private static final PDType0Font pdFont;
   private static final PDType0Font pdBoldFont;
   private static final Font font;
+  public static int TITLE_FONT_SIZE = 25;
+  public static int BODY_FONT_SIZE = 15;
+
+  public static int LARGE_CATEGORY_FONT_SIZE = 20;
+  public static int SMALL_CATEGORY_FONT_SIZE = 17;
 
   static {
     String pdFontName = "Pretendard-Regular.ttf";

@@ -2,6 +2,7 @@ package jy.practice.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,19 +18,12 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-public class SapaCriteriaDto {
-  @JsonProperty("id")
-  private Long id;
-  @JsonProperty("name")
-  private String name;
-  @JsonProperty("achievement_rate")
-  private Integer achievementRate;
-  @JsonProperty("count")
-  private Integer count;
-  @JsonProperty("status")
-  private Status status;
-  @JsonProperty("created_date") // yyyy-MM-dd
-  private String createdDate;
-  @JsonProperty("updated_date") // yyyy-MM-dd
-  private String updatedDate;
+public class StatusDepth1Dto {
+
+  @JsonProperty("sapa_criteria")
+  private SapaCriteriaDto sapaCriteriaDto;
+
+  @JsonProperty("sapa_criteria_elements")
+  private List<SapaCriteriaElementDto> sapaCriteriaElementDtoList;
+
 }

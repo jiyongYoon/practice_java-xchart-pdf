@@ -17,19 +17,21 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-public class SapaCriteriaDto {
+public class SapaCriteriaElementDto {
   @JsonProperty("id")
   private Long id;
   @JsonProperty("name")
   private String name;
-  @JsonProperty("achievement_rate")
+  @JsonProperty("achievementRate")
   private Integer achievementRate;
   @JsonProperty("count")
   private Integer count;
-  @JsonProperty("status")
-  private Status status;
-  @JsonProperty("created_date") // yyyy-MM-dd
+  @JsonProperty("value")
+  private Integer value; // total value
+  @JsonProperty("createdDate") // yyyy-MM-dd
   private String createdDate;
-  @JsonProperty("updated_date") // yyyy-MM-dd
+  @JsonProperty("updatedDate") // yyyy-MM-dd
   private String updatedDate;
+  @JsonProperty("lastUploadedUser")
+  private LastUploadedUserDto lastUploadedUser;
 }

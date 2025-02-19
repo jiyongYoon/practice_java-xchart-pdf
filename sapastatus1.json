@@ -1,0 +1,79 @@
+{
+  "sapa_criteria" : {
+    "id" : 1,
+    "name" : "안전보건 목표 및 경영방침",
+    "count" : 3,
+    "achievement_rate" : 66.6,
+    "created_date" : "2025-01-01",
+    "updated_date" : "2025-01-01",
+    "status" : "보통"
+  },
+  "sapa_criteria_elements" : [
+    {
+      "id" : 1,
+      "sapaCriteriaId" : 1,
+      "name" : "안전보건 목표 및 추진계획서",
+      "period" : "매 월",
+      "value" : 12,
+      "count" : 3,
+      "achievementRate" : 25.0,
+      "createdDate" : "2025-01-01",
+      "updatedDate" : "2025-02-18",
+      "lastUploadedUser" : {
+        "id" : 1,
+        "deptDto" : null,
+        "positionDto" : null,
+        "email" : "wizcore@wizcore.co.kr",
+        "userName" : "김위즈",
+        "user_tel" : "010-1234-1234",
+        "role_type" : "REGULAR",
+        "created_at" : "2024-12-01",
+        "deleted" : false
+      }
+    },
+    {
+      "id" : 1,
+      "sapaCriteriaId" : 1,
+      "name" : "안전보건 경영방침",
+      "period" : "매 월",
+      "value" : 4,
+      "count" : 2,
+      "achievementRate" : 50.0,
+      "createdDate" : "2025-01-01",
+      "updatedDate" : "2025-01-01",
+      "lastUploadedUser" : {
+        "id" : 1,
+        "deptDto" : null,
+        "positionDto" : null,
+        "email" : "wizcore@wizcore.co.kr",
+        "userName" : "홍길동",
+        "user_tel" : "010-1234-1234",
+        "role_type" : "REGULAR",
+        "created_at" : "2024-12-01",
+        "deleted" : false
+      }
+    },
+    {
+      "id" : 1,
+      "sapaCriteriaId" : 1,
+      "name" : "안전관리자-보건관리자-산업보건의 선임 등 보고서(건설업)",
+      "period" : "매 월",
+      "value" : 10,
+      "count" : 7,
+      "achievementRate" : 70.0,
+      "createdDate" : "2025-01-01",
+      "updatedDate" : "2025-01-01",
+      "lastUploadedUser" : {
+        "id" : 1,
+        "deptDto" : null,
+        "positionDto" : null,
+        "email" : "wizcore@wizcore.co.kr",
+        "userName" : "박안전",
+        "user_tel" : "010-1234-1234",
+        "role_type" : "REGULAR",
+        "created_at" : "2024-12-01",
+        "deleted" : false
+      }
+    }
+  ]
+}
