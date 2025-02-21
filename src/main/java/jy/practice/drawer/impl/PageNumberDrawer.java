@@ -1,7 +1,8 @@
-package jy.practice.drawer;
+package jy.practice.drawer.impl;
 
 import java.io.IOException;
-import jy.practice.drawer.material.PageDrawMaterial;
+import jy.practice.drawer.Drawer;
+import jy.practice.drawer.material.impl.PageDrawMaterial;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;

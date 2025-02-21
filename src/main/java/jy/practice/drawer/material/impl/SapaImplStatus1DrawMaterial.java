@@ -1,8 +1,8 @@
-package jy.practice.drawer.material;
+package jy.practice.drawer.material.impl;
 
 import java.awt.Color;
 import java.util.List;
-import jy.practice.example.dto.SafetyHealthItem;
+import jy.practice.drawer.material.DrawMaterial;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +16,7 @@ import org.apache.pdfbox.pdmodel.font.PDType0Font;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SapaCriteriaDrawMaterial implements DrawMaterial {
+public class SapaImplStatus1DrawMaterial implements DrawMaterial {
 
   private float[] columnsOfWidth;
   private String[] headerValue;
@@ -25,7 +25,7 @@ public class SapaCriteriaDrawMaterial implements DrawMaterial {
   private PDType0Font font;
   private PDType0Font boldFont;
   private int bodyFontSize;
-  private int titleFontSize;
-  private List<SapaCriteriaDepth1Element> sapaCriteriaDepth1ElementList;
+  private int headerFontSize;
+  private List<Status1Depth1Element> status1Depth1ElementList;
 
 }

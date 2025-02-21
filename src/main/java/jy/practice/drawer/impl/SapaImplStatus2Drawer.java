@@ -1,18 +1,21 @@
-package jy.practice.drawer;
+package jy.practice.drawer.impl;
 
 import java.awt.Color;
 import java.io.IOException;
 import java.util.Arrays;
+import jy.practice.drawer.BodyDrawer;
+import jy.practice.drawer.Drawer;
+import jy.practice.drawer.TitleDrawer;
 import jy.practice.utils.store.FontStore;
 import jy.practice.drawer.extension.PageCountRepeatedHeaderTableDrawer;
-import jy.practice.drawer.material.BodyDrawMaterial;
-import jy.practice.drawer.material.SapaImplStatus2DrawMaterial;
-import jy.practice.drawer.material.Status2Depth0Element;
-import jy.practice.drawer.material.Status2Depth1Element;
-import jy.practice.drawer.material.Status2Depth2Element;
-import jy.practice.drawer.material.Status2Depth2FileTableElement;
-import jy.practice.drawer.material.StringValueFont;
-import jy.practice.drawer.material.TitleDrawMaterial;
+import jy.practice.drawer.material.impl.BodyDrawMaterial;
+import jy.practice.drawer.material.impl.SapaImplStatus2DrawMaterial;
+import jy.practice.drawer.material.impl.Status2Depth0Element;
+import jy.practice.drawer.material.impl.Status2Depth1Element;
+import jy.practice.drawer.material.impl.Status2Depth2Element;
+import jy.practice.drawer.material.impl.Status2Depth2FileTableElement;
+import jy.practice.drawer.material.impl.StringValueFont;
+import jy.practice.drawer.material.impl.TitleDrawMaterial;
 import jy.practice.utils.factory.PDPageFactory;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -26,7 +29,8 @@ import org.vandeseer.easytable.structure.Table.TableBuilder;
 import org.vandeseer.easytable.structure.cell.TextCell;
 
 // 페이지 넘어감 대응됨
-public class SapaImplStatus2Drawer implements Drawer<SapaImplStatus2DrawMaterial>, TitleDrawer, BodyDrawer {
+public class SapaImplStatus2Drawer implements Drawer<SapaImplStatus2DrawMaterial>, TitleDrawer,
+    BodyDrawer {
 
   public final static String SapaImplStatus2_TITLE_VALUE = "2. 중대재해처벌법 의무 이행 현황 - 세부(2/2)";
   private final static int DEFAULT_TABLE_PADDING = 5;

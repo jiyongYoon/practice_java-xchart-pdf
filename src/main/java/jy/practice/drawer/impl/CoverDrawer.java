@@ -1,12 +1,13 @@
-package jy.practice.drawer;
+package jy.practice.drawer.impl;
 
 import static org.vandeseer.easytable.settings.HorizontalAlignment.CENTER;
 import static org.vandeseer.easytable.settings.VerticalAlignment.MIDDLE;
 
 import java.awt.Color;
 import java.io.IOException;
+import jy.practice.drawer.Drawer;
 import jy.practice.utils.factory.RowFactory;
-import jy.practice.drawer.material.CoverDrawMaterial;
+import jy.practice.drawer.material.impl.CoverDrawMaterial;
 import jy.practice.drawer.extension.PageCountTableDrawer;
 import jy.practice.utils.store.FontStore;
 import jy.practice.utils.factory.PDPageFactory;

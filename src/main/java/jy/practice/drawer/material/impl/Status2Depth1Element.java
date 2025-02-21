@@ -1,4 +1,4 @@
-package jy.practice.drawer.material;
+package jy.practice.drawer.material.impl;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

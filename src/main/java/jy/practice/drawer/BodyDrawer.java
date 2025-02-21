@@ -1,8 +1,8 @@
 package jy.practice.drawer;
 
 import java.io.IOException;
-import jy.practice.drawer.material.BodyDrawMaterial;
-import jy.practice.drawer.material.StringValueFont;
+import jy.practice.drawer.material.impl.BodyDrawMaterial;
+import jy.practice.drawer.material.impl.StringValueFont;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;

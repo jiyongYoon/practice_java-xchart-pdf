@@ -1,4 +1,4 @@
-package jy.practice.drawer;
+package jy.practice.drawer.impl;
 
 import static org.vandeseer.easytable.settings.HorizontalAlignment.CENTER;
 import static org.vandeseer.easytable.settings.HorizontalAlignment.LEFT;
@@ -7,12 +7,14 @@ import static org.vandeseer.easytable.settings.VerticalAlignment.MIDDLE;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.List;
+import jy.practice.drawer.Drawer;
+import jy.practice.drawer.TitleDrawer;
 import jy.practice.utils.store.FontStore;
 import jy.practice.drawer.extension.PageCountRepeatedHeaderTableDrawer;
-import jy.practice.drawer.material.SapaCriteriaDepth1Element;
-import jy.practice.drawer.material.SapaCriteriaDepth2Element;
-import jy.practice.drawer.material.SapaCriteriaDrawMaterial;
-import jy.practice.drawer.material.TitleDrawMaterial;
+import jy.practice.drawer.material.impl.SapaCriteriaDepth1Element;
+import jy.practice.drawer.material.impl.SapaCriteriaDepth2Element;
+import jy.practice.drawer.material.impl.SapaCriteriaDrawMaterial;
+import jy.practice.drawer.material.impl.TitleDrawMaterial;
 import jy.practice.utils.factory.PDPageFactory;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
