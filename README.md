@@ -40,18 +40,29 @@
 - 의존성 없이 사용할 유틸리티 클래스. 
 - 비즈니스 로직과 의존성 없다.
 
-## 3. 한계점
+## 3. 사용
 
-### 1. 확장 및 사용성
+### 1) Java Project
+
+- java 8
+
+[Main 클래스](src/main/java/jy/practice/Main.java) 의 main 메서드 실행시 `./outputs/exmaple.pdf` 파일 생성됨
+
+### 2) Springboot Project
+
+- java 8
+- springboot 2.7.14
+
+[Download API(GET, http://localhost:8080/download)](src/main/java/jy/practice/DownloadController.java) 사용 시 웹 다운로드 진행됨
+
+## 4. 한계점
+
+### 1) 확장 및 사용성
 
 해당 프로젝트의 실제 구현체들은 비즈니스 로직에 의존되어 있다. 실제 작업은 `org.vandeseer.easytable`를 사용하며 추가로 필요한 객체들은 확장 및 인터페이스를 통해 추가로 구현하였다.
 `~~~Drawer.java` 객체를 통해 코드 작성의 흐름을 파악하여 추후 프로젝트에 활용할 예정이다.
 
-### 2. POJO
-
-순수 java코드로 실행되기 때문에 웹애플리케이션을 위해서는 spring(boot) 확장 및 웹 다운로드 기능의 추가가 필요하다.
-
-### 3. legacy version
+### 2) legacy version
 
 사용한 java 및 라이브러리들의 버전이 `java 8` 버전에 맞추어져 있다. (프로젝트 PoC라서 java 8 버전을 사용함)
 

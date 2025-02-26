@@ -2,8 +2,8 @@ package jy.practice.utils.store;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import lombok.experimental.UtilityClass;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
@@ -23,19 +23,20 @@ public class FontStore {
   public static int SMALL_CATEGORY_FONT_SIZE = 17;
 
   static {
-    String pdFontName = "Pretendard-Regular.ttf";
-    String pdFontBoldName = "Pretendard-Bold.ttf";
+    String pdFontPath = "example/fonts/Pretendard-Regular.ttf";
+    String pdBoldFontPath = "example/fonts/Pretendard-Bold.ttf";
     try {
-      pdFont = PDType0Font.load(PD_DOCUMENT_FOR_Fonts, new File("./font/" + pdFontName));
-      font = Font.createFont(Font.TRUETYPE_FONT, new File("./font/" + pdFontName));
+      pdFont = PDType0Font.load(PD_DOCUMENT_FOR_Fonts, FontStore.class.getClassLoader().getResourceAsStream(pdFontPath));
+      font = Font.createFont(Font.TRUETYPE_FONT, FontStore.class.getClassLoader().getResourceAsStream(pdFontPath));
     } catch (IOException | FontFormatException e) {
-      throw new RuntimeException("Cannot read Font file, name=" + pdFontName, e);
+      throw new RuntimeException("Cannot read Font file, name=" + pdFontPath, e);
     }
 
     try {
-      pdBoldFont = PDType0Font.load(PD_DOCUMENT_FOR_Fonts, new File("./font/" + pdFontBoldName));
+      InputStream boldFontStream = FontStore.class.getClassLoader().getResourceAsStream(pdBoldFontPath);
+      pdBoldFont = PDType0Font.load(PD_DOCUMENT_FOR_Fonts, boldFontStream);
     } catch (IOException e) {
-      throw new RuntimeException("Cannot read Font file, name=" + pdFontBoldName, e);
+      throw new RuntimeException("Cannot read Font file, name=" + pdBoldFontPath, e);
     }
   }
 

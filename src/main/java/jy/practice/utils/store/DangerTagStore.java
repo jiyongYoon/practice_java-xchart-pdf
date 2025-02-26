@@ -2,7 +2,6 @@ package jy.practice.utils.store;
 
 import java.io.IOException;
 import java.util.Objects;
-import jy.practice.Main;
 import lombok.experimental.UtilityClass;
 import org.apache.pdfbox.io.IOUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -21,13 +20,13 @@ public class DangerTagStore {
   private static final String prefix = "step=";
 
   public static PDImageXObject pick(long percent) throws IOException {
-    String resourceName = "example/tag/" + pickString(percent);
+    String resourceName = "example/tags/" + pickString(percent);
 
     return PDImageXObject.createFromByteArray(
         PD_DOCUMENT_FOR_IMAGES,
         IOUtils.toByteArray(
-            Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream(resourceName))),
-        "example/tag");
+            Objects.requireNonNull(DangerTagStore.class.getClassLoader().getResourceAsStream(resourceName))),
+        "example/tags");
   }
 
   private static String pickString(long percent) {

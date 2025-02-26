@@ -35,7 +35,7 @@ public class DashboardTest {
         Font font = FontStore.getFont();
         font = font.deriveFont(25f);
 
-        String documentFilePath = "example/tag/document.png";
+        String documentFilePath = "example/tags/document.png";
         byte[] documentByteArray = IOUtils.toByteArray(Objects.requireNonNull(
             Main.class.getClassLoader().getResourceAsStream(documentFilePath)));
 
