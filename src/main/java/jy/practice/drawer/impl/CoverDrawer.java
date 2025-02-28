@@ -34,7 +34,7 @@ public class CoverDrawer implements Drawer<CoverDrawMaterial> {
     final TableBuilder tableBuilder = Table.builder()
         .addColumnsOfWidth(COLUMNS_OF_WIDTH)
         .fontSize(DEFAULT_FONT_SIZE)
-        .font(FontStore.getPdBoldFont())
+        .font(FontStore.getPdBoldFont(document))
         .backgroundColor(Color.WHITE)
           .borderColor(Color.WHITE)
 //        .borderColor(Color.BLACK).borderWidth(1) // 디버깅용

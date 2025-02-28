@@ -46,8 +46,8 @@ public class ImageTest {
 
       PDImageXObject logoImage = PDImageFactory.generate(logoByteArray, logoFilePath.split("\\.")[0]);
 
-      PDType0Font font = FontStore.getPdFont();
-      PDType0Font boldFont = FontStore.getPdBoldFont();
+      PDType0Font font = FontStore.getPdFont(document);
+      PDType0Font boldFont = FontStore.getPdBoldFont(document);
 
       final TableBuilder tableBuilder = Table.builder()
           .addColumnsOfWidth(750)

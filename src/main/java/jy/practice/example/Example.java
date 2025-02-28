@@ -113,14 +113,14 @@ public class Example {
     StatusDepth1Dto statusDepth1Dto = objectMapper.readValue(sb.toString(), StatusDepth1Dto.class);
 
     ////////////////// 문서 전체 그리기 /////////////////
-
-    PDType0Font pdFont = FontStore.getPdFont();
-    PDType0Font pdBoldFont = FontStore.getPdBoldFont();
     float MARGIN = 35f;
     float dashboardMargin = 35f;
     List<String> titleList = new ArrayList<>();
 
     try (PDDocument document = new PDDocument()) {
+      PDType0Font pdFont = FontStore.getPdFont(document);
+      PDType0Font pdBoldFont = FontStore.getPdBoldFont(document);
+
       drawReport(safetyHealthItems, dashboardDto, statusDepth1Dto, pdFont, pdBoldFont, MARGIN,
           dashboardMargin, titleList, document);
 

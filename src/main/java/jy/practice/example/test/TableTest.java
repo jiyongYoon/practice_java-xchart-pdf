@@ -65,8 +65,8 @@ public class TableTest {
       PDPage page = PDPageFactory.generateHorizontalPage();
       document.addPage(page);
 
-      PDType0Font font = FontStore.getPdFont();
-      PDType0Font boldFont = FontStore.getPdBoldFont();
+      PDType0Font font = FontStore.getPdFont(document);
+      PDType0Font boldFont = FontStore.getPdBoldFont(document);
 
       final TableBuilder tableBuilder = Table.builder()
           .addColumnsOfWidth(200, 250, 100, 100, 100)

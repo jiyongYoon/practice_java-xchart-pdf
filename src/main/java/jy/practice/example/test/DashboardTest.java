@@ -29,37 +29,36 @@ public class DashboardTest {
 
     public static void main(String[] args) throws IOException {
 
-        PDType0Font pdFont = FontStore.getPdFont();
-        PDType0Font pdBoldFont = FontStore.getPdBoldFont();
-
         Font font = FontStore.getFont();
         font = font.deriveFont(25f);
 
         String documentFilePath = "example/tags/document.png";
         byte[] documentByteArray = IOUtils.toByteArray(Objects.requireNonNull(
             Main.class.getClassLoader().getResourceAsStream(documentFilePath)));
-
         PDImageXObject documentImage = PDImageFactory.generate(documentByteArray, documentFilePath.split("\\.")[0]);
 
-        DashboardTableComponent dashboardTableComponent = DashboardTableComponent.builder()
-            .font(pdFont)
-            .fontSize(8)
-            .boldFont(pdBoldFont)
-            .boldFontSize(8)
-            .xColSize(12)
-            .xColCount(16)
-            .rowHeight(10f)
-            .documentImage(documentImage)
-            .build();
-
-        float componentWidth = dashboardTableComponent.getComponentWidth();
-        float componentHeight = dashboardTableComponent.getComponentHeight();
-
         try (PDDocument document = new PDDocument()) {
+            PDType0Font pdFont = FontStore.getPdFont(document);
+            PDType0Font pdBoldFont = FontStore.getPdBoldFont(document);
+
             final PDPage page = PDPageFactory.generateHorizontalPage();
             document.addPage(page);
 
             try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
+                DashboardTableComponent dashboardTableComponent = DashboardTableComponent.builder()
+                    .font(pdFont)
+                    .fontSize(8)
+                    .boldFont(pdBoldFont)
+                    .boldFontSize(8)
+                    .xColSize(12)
+                    .xColCount(16)
+                    .rowHeight(10f)
+                    .documentImage(documentImage)
+                    .build();
+
+                float componentWidth = dashboardTableComponent.getComponentWidth();
+                float componentHeight = dashboardTableComponent.getComponentHeight();
+
                 int chartsWidthAndHeight = 150;
                 int okCount = 7;
                 int totalCount = 12;
